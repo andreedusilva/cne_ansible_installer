@@ -1,0 +1,16 @@
+# OLCNE API Server
+api-server  ansible_host=api-server.domain
+
+# Kubernetes Master
+[masters]
+master      ansible_host=master.domain
+
+# Kubernetes Workers
+[workers]
+worker01    ansible_host=worker01.domain
+worker02    ansible_host=worker02.domain
+
+# Kubernetes hosts
+[kubernetes:children]
+masters
+workers
