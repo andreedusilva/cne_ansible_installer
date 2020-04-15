@@ -244,15 +244,7 @@
       name: Generating a certificates
       command:
         chdir: /etc/olcne
-        argv:
-          - ./gen-certs-helper.sh
-          - --cert-request-organization-unit "{{ org_unit }}"
-          - --cert-request-organization "{{ org }}"
-          - --cert-request-locality "{{ locality }}"
-          - --cert-request-state "{{ state }}"
-          - --cert-request-country {{ country }}
-          - --cert-request-common-name {{ common_name }}
-          - --nodes {{ all_nodes }}
+        cmd: ./gen-certs-helper.sh --cert-request-organization-unit "{{ org_unit }}" --cert-request-organization "{{ org }}" --cert-request-locality "{{ locality }}" --cert-request-state "{{ state }}" --cert-request-country {{ country }} --cert-request-common-name {{ common_name }} --nodes {{ all_nodes }}
     -
       name: Set correct user to send certificates
       replace:
