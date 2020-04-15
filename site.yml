@@ -4,10 +4,6 @@
 -
   name: Apply proxy configuration to all hosts
   hosts: all
-  vars:
-    use_proxy: False
-    proxy_host: "http://proxy.domain:80"
-    no_proxy: ".domain,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16"
   tasks:
     -
       name: Configure Proxy for YUM
@@ -29,10 +25,6 @@
 -
   name: Apply proxy configuration to all kubernetes hosts
   hosts: kubernetes
-  vars:
-    use_proxy: False
-    proxy_host: "http://proxy.domain:80"
-    no_proxy: ".domain,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16"
   tasks:
     -
       name: Create directory for CRIO Proxy configuration
@@ -56,15 +48,12 @@
 -
   name: Apply environment settings for all
   hosts: all
-#  vars:
-#    same_servers: False
   tasks:
 #    -
 #      name: Update all hosts
 #      yum:
 #        name: '*'
 #        state: latest
-#      when: same_servers == False
     -
       name: Disable SELinux
       selinux:
@@ -250,20 +239,20 @@
 -
   name: Configure OLCNE, certificates and start services on API-Server
   hosts: api-server
-  vars:
-    org_unit: Labs
-    org: Leao Org
-    locality: Salvador
-    state: Bahia
-    country: BR
-    common_name: cloud.domain
-    all_nodes: api-server.domain,master.domain,worker01.domain,worker02.domain
   tasks:
     -
       name: Generating a certificates
       command:
         chdir: /etc/olcne
-        cmd: ./gen-certs-helper.sh --cert-request-organization-unit "{{ org_unit }}" --cert-request-organization "{{ org }}" --cert-request-locality "{{ locality }}" --cert-request-state "{{ state }}" --cert-request-country {{ country }} --cert-request-common-name {{ common_name }} --nodes {{ all_nodes }}
+        argv:
+          - ./gen-certs-helper.sh
+          - --cert-request-organization-unit "{{ org_unit }}"
+          - --cert-request-organization "{{ org }}"
+          - --cert-request-locality "{{ locality }}"
+          - --cert-request-state "{{ state }}"
+          - --cert-request-country {{ country }}
+          - --cert-request-common-name {{ common_name }}
+          - --nodes {{ all_nodes }}
     -
       name: Set correct user to send certificates
       replace:
@@ -295,3 +284,4 @@
       name: Start API agent
       command:
         cmd: /etc/olcne/bootstrap-olcne.sh --secret-manager-type file --olcne-node-cert-path /etc/olcne/configs/certificates/production/node.cert --olcne-ca-path /etc/olcne/configs/certificates/production/ca.cert --olcne-node-key-path /etc/olcne/configs/certificates/production/node.key --olcne-component agent
+...
