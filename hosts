@@ -8,7 +8,7 @@ master      ansible_host=master.leao.org
 # Kubernetes Workers
 [workers]
 worker01    ansible_host=worker01.leao.org
-worker02    ansible_host=worker02.leao.org 
+worker02    ansible_host=worker02.leao.org
 
 # Kubernetes hosts
 [kubernetes:children]
