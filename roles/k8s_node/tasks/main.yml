@@ -1,0 +1,104 @@
+---
+# tasks file for olcne
+
+# Configure Proxy for environment
+-
+  name: Create directory for CRIO Proxy configuration
+  file:
+    path: /etc/systemd/system/crio.service.d
+    state: directory
+    mode: '0755'
+  when: use_proxy == True
+-
+  name: Configure Proxy for CRIO
+  blockinfile:
+    path: /etc/systemd/system/crio.service.d/proxy.conf
+    block: |
+      [Service]
+      Environment="HTTP_PROXY={{ proxy_host }}"
+      Environment="HTTPS_PROXY={{ proxy_host }}"
+      Environment="NO_PROXY={{ no_proxy }}"
+    create: yes
+  when: use_proxy == True
+
+# Apply environment settings for Kubernetes nodes
+-
+  name: Disable swap
+  command:
+    cmd: /usr/sbin/swapoff -a
+-
+  name: Comment swap entry from /etc/fstab
+  replace:
+    path: /etc/fstab
+    regexp: '^(\s*)([^#\n]+\s+)(\w+\s+)swap(\s+.*)$'
+    replace: '#\1\2\3swap\4'
+-
+  name: Load the br_netfilter module
+  modprobe:
+    name: br_netfilter
+    state: present
+-
+  name: Add the br_netfilter module as permanent
+  lineinfile:
+    path: /etc/modules-load.d/br_netfilter.conf
+    line: "br_netfilter"
+    create: yes
+-
+  name: Add bridge-nf-call-ip6tables
+  sysctl:
+    name: net.bridge.bridge-nf-call-ip6tables
+    value: '1'
+    sysctl_set: yes
+    state: present
+    reload: yes
+-
+  name: Add net.bridge.bridge-nf-call-iptables
+  sysctl:
+    name: net.bridge.bridge-nf-call-iptables
+    value: '1'
+    sysctl_set: yes
+    state: present
+    reload: yes
+-
+  name: Add net.ipv4.ip_forward
+  sysctl:
+    name: net.ipv4.ip_forward
+    value: '1'
+    sysctl_set: yes
+    state: present
+    reload: yes
+
+# Configure Kubernetes Nodes
+-
+  name: Installing Platform API Agent, and utilities
+  yum:
+    name:
+      - olcne-agent
+      - olcne-utils
+    state: present
+-
+  name: Enabling OLCNE Agent
+  service:
+    name: olcne-agent
+    enabled: yes
+-
+  name: Installing Kubernetes packages
+  yum:
+    name:
+      - kubeadm
+      - kubelet
+      - kubectl
+    state: present
+-
+  name: Enabling Kubelet service
+  service:
+    name: kubelet
+    enabled: yes
+-
+  name: Enabling CRIO service
+  service:
+    name: crio
+    state: started
+    enabled: yes
+
+...

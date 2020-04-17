@@ -1,9 +1,11 @@
 ---
+# Certificate information
 org_unit: Labs
 org: Leao Org
 locality: Salvador
 state: Bahia
 country: BR
 common_name: cloud.leao.org
+
+# All nodes to be installed (FQDN)
 all_nodes: api-server.leao.org,master.leao.org,worker01.leao.org,worker02.leao.org
-...

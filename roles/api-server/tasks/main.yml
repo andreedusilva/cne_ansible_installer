@@ -1,0 +1,61 @@
+---
+# tasks file for olcne
+
+# Apply firewall rules for API-Server
+-
+  firewalld:
+    port: 8091/tcp
+    permanent: True
+    state: enabled
+
+# Reload firewall rules
+-
+  name: Reloading firewalld
+  command:
+    cmd: firewall-cmd --reload
+
+# Configure API-Server
+-
+  name: Installing Platform CLI, Platform API Server, and utilities
+  yum:
+    name:
+      - olcnectl
+      - olcne-api-server
+      - olcne-utils
+    state: present
+-
+  name: Enabling OLCNE API-Server
+  service:
+    name: olcne-api-server
+    enabled: yes
+
+# Configure OLCNE, certificates and start services on API-Server
+-
+  name: Generating a certificates
+  command:
+    chdir: /etc/olcne
+    cmd: ./gen-certs-helper.sh --cert-request-organization-unit "{{ org_unit }}" --cert-request-organization "{{ org }}" --cert-request-locality "{{ locality }}" --cert-request-state "{{ state }}" --cert-request-country {{ country }} --cert-request-common-name {{ common_name }} --nodes {{ all_nodes }}
+-
+  name: Set correct user to send certificates
+  replace:
+    path: /etc/olcne/configs/certificates/olcne-tranfer-certs.sh
+    regexp: '(\s+)USER=opc(\s+.*)?$'
+    replace: '\1USER=root\2'
+-
+  name: Copy certificates to Kubernetes nodes
+  command:
+    chdir: /etc/olcne
+    cmd: bash -ex /etc/olcne/configs/certificates/olcne-tranfer-certs.sh
+-
+  name: Start API-Server
+  command:
+    cmd: /etc/olcne/bootstrap-olcne.sh --secret-manager-type file --olcne-node-cert-path /etc/olcne/configs/certificates/production/node.cert --olcne-ca-path /etc/olcne/configs/certificates/production/ca.cert --olcne-node-key-path /etc/olcne/configs/certificates/production/node.key --olcne-component api-server
+-
+  name: Configure OLCNE environment
+  blockinfile:
+    path: /etc/profile.d/sh.local
+    block: |
+      export OLCNE_SM_CA_PATH=/etc/olcne/configs/certificates/production/ca.cert
+      export OLCNE_SM_CERT_PATH=/etc/olcne/configs/certificates/production/node.cert
+      export OLCNE_SM_KEY_PATH=/etc/olcne/configs/certificates/production/node.key
+...

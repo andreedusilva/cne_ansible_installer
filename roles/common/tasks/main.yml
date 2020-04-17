@@ -1,0 +1,51 @@
+---
+# tasks file for olcne
+
+# Configure Proxy for environment
+-
+  name: Configure Proxy for YUM
+  lineinfile:
+    path: /etc/yum.conf
+    line: "proxy={{ proxy_host }}"
+  when: use_proxy == True
+-
+  name: Configure Proxy for environment
+  blockinfile:
+    path: /etc/profile.d/sh.local
+    block: |
+      export all_proxy="{{ proxy_host }}"
+      export http_proxy="{{ proxy_host }}"
+      export https_proxy="{{ proxy_host }}"
+      export no_proxy="{{ no_proxy }}"
+    create: yes
+  when: use_proxy == True
+
+# Configure general environment
+#-
+#  name: Update all hosts
+#  yum:
+#    name: '*'
+#    state: latest
+-
+  name: Install chrony
+  yum:
+    name: chrony
+    state: present
+-
+  name: Start chrony Service
+  service:
+    name: chronyd
+    state: started
+    enabled: yes
+
+# Configure YUM repositories and installing packages
+-
+  name: Installing OLCNE
+  yum:
+    name: oracle-olcne-release-el7
+    state: present
+-
+  name: Enabling repositories
+  command:
+    cmd: yum-config-manager --enable ol7_olcne ol7_kvm_utils ol7_addons ol7_latest ol7_UEKR5
+...
