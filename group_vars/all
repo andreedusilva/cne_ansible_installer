@@ -3,5 +3,5 @@
 use_proxy: False
 
 # Proxy URL and Rules
-proxy_host: "http://wwww-proxy.us.leao.org:80"
+proxy_host: "http://wwww-proxy.br.leao.org:80"
 no_proxy: ".leao.org,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16"

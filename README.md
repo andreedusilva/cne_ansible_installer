@@ -2,7 +2,7 @@
 
 - Expects Oracle Linux 7u5 hosts
 
-These playbooks deploy an OLCNE version 1.0.x on top of 2 hosts/VMs (minimum). 
+These playbooks deploy an OLCNE version 1.0.x on top of 2 hosts/VMs (minimum).
 To use them, first edit the `hosts` inventory file to contain the hostnames of the machines on which you want OLCNE deployed.
 
 You need to add at least a worker and master node. The API-Server may be the same as the master node.
@@ -45,19 +45,17 @@ And last, edit `group_vars/all` to setup proxy information of your installation 
     use_proxy: False
 
     # Proxy URL and Rules
-    proxy_host: "http://wwww-proxy.us.leao.org:80"
+    proxy_host: "http://wwww-proxy.br.leao.org:80"
     no_proxy: ".leao.org,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16"
- 
- ### Deploy Oracle Linux Cloud Native Environment
- 
- The site.yml may be used to deploy a full Oracle Linux Cloud Native Environment. 
- 
- Run the playbook using:
- 
-    ansible-playbook -i hosts site.yml
- 
- ### Creating a Kubernetes Cluster and Other Modules
- 
- After playbook is completed, you can setup a Kubernetes cluster, others modules and a user to control K8s following this doc: https://docs.oracle.com/en/operating-systems/olcne/start/deploy-kube.html
- 
 
+ ### Deploy Oracle Linux Cloud Native Environment
+
+ The site.yml may be used to deploy a full Oracle Linux Cloud Native Environment.
+
+ Run the playbook using:
+
+    ansible-playbook -i hosts site.yml
+
+ ### Creating a Kubernetes Cluster and Other Modules
+
+ After playbook is completed, you can setup a Kubernetes cluster, others modules and a user to control K8s following this doc: https://docs.oracle.com/en/operating-systems/olcne/start/deploy-kube.html
