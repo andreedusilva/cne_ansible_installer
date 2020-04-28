@@ -48,6 +48,15 @@ And last, edit `group_vars/all` to setup proxy information of your installation 
     proxy_host: "http://proxy.inat.leao.pro.br:80"
     no_proxy: ".inat.leao.pro.br,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16"
 
+Note: edit `roles\common\tasks\main.yml` and uncomment the yum update lines to update your hosts in the same process of installs OLCNE (much slower):
+
+    # Configure general environment
+    -
+      name: Update all hosts
+      yum:
+        name: '*'
+        state: latest
+
  ### Deploy Oracle Linux Cloud Native Environment
 
  The site.yml may be used to deploy a full Oracle Linux Cloud Native Environment.
