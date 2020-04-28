@@ -47,5 +47,5 @@
 -
   name: Enabling repositories
   command:
-    cmd: yum-config-manager --enable ol7_olcne ol7_kvm_utils ol7_addons ol7_latest ol7_UEKR5
+    cmd: yum-config-manager --enable ol7_olcne11 ol7_kvm_utils ol7_addons ol7_latest ol7_UEKR5
 ...
