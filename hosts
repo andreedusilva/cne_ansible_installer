@@ -1,14 +1,14 @@
 # OLCNE API Server
-api-server  ansible_host=api-server.leao.org
+api-server  ansible_host=api-server.inat.leao.pro.br
 
 # Kubernetes Master
 [masters]
-master      ansible_host=master.leao.org
+master      ansible_host=master.inat.leao.pro.br
 
 # Kubernetes Workers
 [workers]
-worker01    ansible_host=worker01.leao.org
-worker02    ansible_host=worker02.leao.org
+worker01    ansible_host=worker01.inat.leao.pro.br
+worker02    ansible_host=worker02.inat.leao.pro.br
 
 # Kubernetes hosts
 [kubernetes:children]

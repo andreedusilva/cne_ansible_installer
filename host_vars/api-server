@@ -5,7 +5,7 @@ org: Leao Org
 locality: Salvador
 state: Bahia
 country: BR
-common_name: cloud.leao.org
+common_name: cloud.inat.leao.pro.br
 
 # All nodes to be installed (FQDN)
-all_nodes: api-server.leao.org,master.leao.org,worker01.leao.org,worker02.leao.org
+all_nodes: api-server.inat.leao.pro.br,master.inat.leao.pro.br,worker01.inat.leao.pro.br,worker02.inat.leao.pro.br
