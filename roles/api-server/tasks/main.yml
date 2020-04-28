@@ -14,6 +14,25 @@
   command:
     cmd: firewall-cmd --reload
 
+# Configure SSH Key to login on agents
+-
+  name: Generating ssh key pair
+  openssh_keypair:
+    path: "{{ id_rsa_file }}"
+-
+  name: Adjusting ssh config
+  blockinfile:
+    path: /root/.ssh/config
+    block: |
+      Host *
+          StrictHostKeyChecking no
+    create: yes
+-
+  name: Copy public key to the nodes
+  command:
+    cmd: sshpass -p "{{ root_password }}" ssh-copy-id -i "{{ id_rsa_file }}" root@"{{ item }}" -f
+  loop: "{{ groups['all'] }}"
+
 # Configure API-Server
 -
   name: Installing Platform CLI, Platform API Server, and utilities

@@ -9,3 +9,12 @@ common_name: cloud.inat.leao.pro.br
 
 # All nodes to be installed (FQDN)
 all_nodes: api-server.inat.leao.pro.br,master.inat.leao.pro.br,worker01.inat.leao.pro.br,worker02.inat.leao.pro.br
+
+# For use with SSH Public Key Managenment
+id_rsa_file: /root/.ssh/id_rsa
+root_password: "Temp$123"
+nodes:
+  - api-server.inat.leao.pro.br
+  - master.inat.leao.pro.br
+  - worker01.inat.leao.pro.br
+  - worker02.inat.leao.pro.br
