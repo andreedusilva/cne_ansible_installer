@@ -27,6 +27,17 @@
       Host *
           StrictHostKeyChecking no
     create: yes
+    mode: 0600
+-
+  name: Install EPEL repository to deploy sshpass
+  yum:
+    name: oracle-epel-release-el7
+    state: present
+-
+  name: Install sshpass command
+  yum:
+    name: sshpass
+    state: present
 -
   name: Copy public key to the nodes
   command:
