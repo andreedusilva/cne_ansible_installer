@@ -1,5 +1,5 @@
 ---
-# This playbook installs OLCNE (single master)
+# This playbook installs OLCNE 1.1
 -
   name: Apply common configuration to all nodes
   hosts: all
