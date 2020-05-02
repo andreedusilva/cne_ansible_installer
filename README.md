@@ -26,7 +26,7 @@ There is an example of `hosts` file:
     masters
     workers
 
-Then edit `host_vars/api-server` file to edit self-signed certification data as below (do not forget to add all FQDN of hostnames of your installation on `all_nodes` variable):
+Then edit `host_vars/api-server` file to edit self-signed certification data as below (do not forget to add all FQDN of hostnames of your installation on nodes variables) and RSA key file with root password for API-Server:
 
     # Certificate information
     org_unit: Labs
@@ -37,9 +37,16 @@ Then edit `host_vars/api-server` file to edit self-signed certification data as 
     common_name: cloud.inat.leao.pro.br
 
     # All nodes to be installed (FQDN)
+    master_ip_addr: 192.168.86.23
+    master: master.inat.leao.pro.br:8090
+    workers: worker01.inat.leao.pro.br:8090,worker02.inat.leao.pro.br:8090
     all_nodes: api-server.inat.leao.pro.br,master.inat.leao.pro.br,worker01.inat.leao.pro.br,worker02.inat.leao.pro.br
 
-And last, edit `group_vars/all` to setup proxy information of your installation or set `use_proxy` to `False`:
+    # For use with SSH Public Key Managenment
+    id_rsa_file: /root/.ssh/id_rsa
+    root_password: "PASSWORD"
+
+And last, edit `group_vars/all` to setup proxy information of your installation and the Kubernetes environment information:
 
     # Use Proxy?
     use_proxy: False
@@ -47,6 +54,19 @@ And last, edit `group_vars/all` to setup proxy information of your installation 
     # Proxy URL and Rules
     proxy_host: "http://proxy.inat.leao.pro.br:80"
     no_proxy: ".inat.leao.pro.br,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16"
+
+    # Configure an Environment?
+    config_env: True
+    env_name: myenv
+    cluster: mycluster
+
+    # Configure Istio module?
+    use_istio: True
+    istio_module: myistio
+
+    # Helm is required to deploy Istio
+    use_helm: True 
+    helm_module: myhelm
 
 Note: edit `roles\common\tasks\main.yml` and uncomment the yum update lines to update your hosts in the same process of installs OLCNE (much slower):
 

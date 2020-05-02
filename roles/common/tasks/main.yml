@@ -1,6 +1,12 @@
 ---
 # tasks file for olcne
 
+# Configure SELinux
+-
+  name: Disable SELinux
+  selinux:
+    state: disabled
+
 # Configure Proxy for environment
 -
   name: Configure Proxy for YUM
