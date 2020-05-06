@@ -26,11 +26,11 @@ There is an example of `hosts` file:
     masters
     workers
 
-Then edit `host_vars/api-server` file to edit self-signed certification data as below (do not forget to add all FQDN of hostnames of your installation on nodes variables) and RSA key file with root password for API-Server:
+Then edit `group_vars/api_servers` file to edit self-signed certification data as below (do not forget to add all FQDN of hostnames of your installation on nodes variables) and RSA key file with root password for API-Server:
 
     # Certificate information
     org_unit: Labs
-    org: Leao Org
+    org: Leao Pro
     locality: Salvador
     state: Bahia
     country: BR
@@ -68,7 +68,7 @@ And last, edit `group_vars/all` to setup proxy information of your installation 
     use_helm: True 
     helm_module: myhelm
 
-Note: edit `roles\common\tasks\main.yml` and uncomment the yum update lines to update your hosts in the same process of installs OLCNE (much slower):
+Note: edit `roles/common/tasks/main.yml` and uncomment the yum update lines to update your hosts in the same process of installs OLCNE (much slower):
 
     # Configure general environment
     -
