@@ -10,8 +10,9 @@
 -
   name: Adding kubernetes to the environment
   command:
-#    cmd: olcnectl --api-server 127.0.0.1:8091 module create --environment-name {{ env_name }} --module kubernetes --name {{ cluster }} --container-registry container-registry.oracle.com/olcne --apiserver-advertise-address {{ master_ip_addr }} --master-nodes {{ master_node }} --worker-nodes {{ worker_nodes }} 
-    cmd: olcnectl --api-server 127.0.0.1:8091 module create --environment-name {{ env_name }} --module kubernetes --name {{ cluster }} --container-registry container-registry-gru.oracle.com/olcne --apiserver-advertise-address {{ master_ip_addr }} --master-nodes {{ master_node }} --worker-nodes {{ worker_nodes }} 
+    cmd: olcnectl --api-server 127.0.0.1:8091 module create --environment-name {{ env_name }} --module kubernetes --name {{ cluster }} --container-registry container-registry.oracle.com/olcne --apiserver-advertise-address {{ master_ip_addr }} --master-nodes {{ master_node }} --worker-nodes {{ worker_nodes }} 
+# This command below is to change the registry to a closer place (SP/Brazil). 
+#    cmd: olcnectl --api-server 127.0.0.1:8091 module create --environment-name {{ env_name }} --module kubernetes --name {{ cluster }} --container-registry container-registry-gru.oracle.com/olcne --apiserver-advertise-address {{ master_ip_addr }} --master-nodes {{ master_node }} --worker-nodes {{ worker_nodes }} 
   when: config_env == True
 
 # Deploy kubernetes
