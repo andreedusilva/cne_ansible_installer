@@ -26,7 +26,7 @@
 
 -
   name: Configure and deploy API Server
-  hosts: api-server
+  hosts: api_servers
   roles:
     - api-server
 
@@ -41,7 +41,7 @@
 
 -
   name: Extra configuration (optional)
-  hosts: api-server
+  hosts: api_servers
   roles:
     - extra
 
