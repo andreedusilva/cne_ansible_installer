@@ -3,6 +3,7 @@
 
 # Apply firewall rules for API-Server
 -
+  name: Aplying firewall rules
   firewalld:
     port: 8091/tcp
     permanent: True
