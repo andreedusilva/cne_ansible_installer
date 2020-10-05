@@ -9,6 +9,18 @@
     permanent: True
     state: enabled
 
+# Aplying masquerade firewall rules
+-
+  name: Aplying masquerade firewall rules
+  command:
+    cmd: firewall-cmd --remove-masquerade --permanent
+
+# Aplying CNI interface to firewall rules
+-
+  name: Aplying CNI interface to firewall rules
+  command:
+    cmd: firewall-cmd --zone=trusted --add-interface=cni0 --permanent
+
 # Reload firewall rules
 -
   name: Reloading firewalld
