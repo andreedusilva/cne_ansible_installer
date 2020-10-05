@@ -12,6 +12,19 @@
     - 10250/tcp
     - 10255/tcp
     - 8472/udp
+
+# Aplying masquerade firewall rules
+-
+  name: Aplying masquerade firewall rules
+  command:
+    cmd: firewall-cmd --remove-masquerade --permanent
+
+# Aplying CNI interface to firewall rules
+-
+  name: Aplying CNI interface to firewall rules
+  command:
+    cmd: firewall-cmd --zone=trusted --add-interface=cni0 --permanent
+
 # Reload firewall rules
 -
   name: Reloading firewalld
