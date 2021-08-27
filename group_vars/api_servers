@@ -1,18 +1,18 @@
 ---
 # Certificate information
 org_unit: Labs
-org: Leao Pro
+org: OL SC
 locality: Salvador
 state: Bahia
 country: BR
-common_name: cloud.inat.leao.pro.br
+common_name: cloud.br.olsclab.net
 
 # All nodes to be installed (FQDN)
-master_ip_addr: 192.168.86.23
-master_node: master.inat.leao.pro.br:8090
-worker_nodes: worker01.inat.leao.pro.br:8090,worker02.inat.leao.pro.br:8090
-all_nodes: api-server.inat.leao.pro.br,master.inat.leao.pro.br,worker01.inat.leao.pro.br,worker02.inat.leao.pro.br
+master_ip_addr: 192.168.0.31
+master_node: master.br.olsclab.net:8090
+worker_nodes: worker.br.olsclab.net:8090
+all_nodes: master.br.olsclab.net,worker.br.olsclab.net
 
 # For use with SSH Public Key Managenment
 id_rsa_file: /root/.ssh/id_rsa
-root_password: "PASSWORD"
+root_password: "oracle"
