@@ -8,13 +8,13 @@ no_proxy: ".inat.leao.pro.br,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16"
 
 # Configure an Environment?
 config_env: True
-env_name: myenv
-cluster: mycluster
+env_name: olcne
+cluster: cluster
 
 # Configure Istio module?
-use_istio: True
-istio_module: myistio
+use_istio: False
+istio_module: istio
 
 # Helm is required to deploy Istio
-use_helm: True 
-helm_module: myhelm 
+use_helm: False 
+helm_module: helm 
