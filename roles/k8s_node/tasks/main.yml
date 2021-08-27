@@ -71,7 +71,7 @@
 # Configure Kubernetes Nodes
 -
   name: Installing Platform API Agent, and utilities
-  yum:
+  dnf:
     name:
       - olcne-agent
       - olcne-utils
@@ -80,25 +80,6 @@
   name: Enabling OLCNE Agent
   service:
     name: olcne-agent
-    enabled: yes
--
-  name: Installing Kubernetes packages
-  yum:
-    name:
-      - kubeadm
-      - kubelet
-      - kubectl
-    state: present
--
-  name: Enabling Kubelet service
-  service:
-    name: kubelet
-    enabled: yes
--
-  name: Enabling CRIO service
-  service:
-    name: crio
-    state: started
     enabled: yes
 
 ...
