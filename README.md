@@ -1,8 +1,8 @@
 ### Oracle Linux Cloud Native Environment Installer
 
-- Expects Oracle Linux 7u5 or higher hosts
+- Expects Oracle Linux 8u3 or higher hosts
 
-These playbooks deploy an OLCNE version 1.1.x on top of 2 hosts/VMs (minimum).
+These playbooks deploy an OLCNE version 1.3.x on top of 2 hosts/VMs (minimum).
 To use them, first edit the `hosts` inventory file to contain the hostnames of the machines on which you want OLCNE deployed.
 
 You need to add at least a worker and master node. The API-Server may be the same as the master node.
@@ -73,7 +73,7 @@ Note: edit `roles/common/tasks/main.yml` and uncomment the yum update lines to u
     # Configure general environment
     -
       name: Update all hosts
-      yum:
+      dnf:
         name: '*'
         state: latest
 
