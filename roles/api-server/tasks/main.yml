@@ -43,12 +43,12 @@
     mode: 0600
 -
   name: Install EPEL repository to deploy sshpass
-  yum:
+  dnf:
     name: ol8_x86_64_developer_EPEL
     state: present
 -
   name: Install sshpass command
-  yum:
+  dnf:
     name: sshpass
     state: present
 -
@@ -60,7 +60,7 @@
 # Configure API-Server
 -
   name: Installing Platform CLI, Platform API Server, and utilities
-  yum:
+  dnf:
     name:
       - olcnectl
       - olcne-api-server
