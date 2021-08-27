@@ -9,9 +9,9 @@
 
 # Configure Proxy for environment
 -
-  name: Configure Proxy for YUM
+  name: Configure Proxy for DNF
   lineinfile:
-    path: /etc/yum.conf
+    path: /etc/dnf/dnf.conf
     line: "proxy={{ proxy_host }}"
   when: use_proxy == True
 -
@@ -29,12 +29,12 @@
 # Configure general environment
 #-
 #  name: Update all hosts
-#  yum:
+#  dnf:
 #    name: '*'
 #    state: latest
 -
   name: Install chrony
-  yum:
+  dnf:
     name: chrony
     state: present
 -
@@ -44,14 +44,14 @@
     state: started
     enabled: yes
 
-# Configure YUM repositories and installing packages
+# Configure DNF repositories and installing packages
 -
   name: Installing OLCNE
-  yum:
-    name: oracle-olcne-release-el7
+  dnf:
+    name: oracle-olcne-release-el8
     state: present
 -
   name: Enabling repositories
   command:
-    cmd: yum-config-manager --enable ol7_olcne11 ol7_kvm_utils ol7_addons ol7_latest ol7_UEKR5
+    cmd: dnf config-manager --enable ol8_olcne13 ol8_addons ol8_baseos_latest ol8_UEKR6
 ...
