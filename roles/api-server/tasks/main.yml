@@ -10,10 +10,10 @@
     state: enabled
 
 # Aplying masquerade firewall rules
--
-  name: Aplying masquerade firewall rules
-  command:
-    cmd: firewall-cmd --remove-masquerade --permanent
+#-
+#  name: Aplying masquerade firewall rules
+#  command:
+#    cmd: firewall-cmd --remove-masquerade --permanent
 
 # Aplying CNI interface to firewall rules
 -
@@ -44,7 +44,7 @@
 -
   name: Install EPEL repository to deploy sshpass
   yum:
-    name: oracle-epel-release-el7
+    name: ol8_x86_64_developer_EPEL
     state: present
 -
   name: Install sshpass command
@@ -89,6 +89,11 @@
   command:
     chdir: /etc/olcne
     cmd: bash -ex /etc/olcne/configs/certificates/olcne-tranfer-certs.sh
+-
+  name: Generating additional certificates
+  command:
+    chdir: /etc/olcne
+    cmd: ./gen-certs-helper.sh --cert-dir /etc/olcne/configs/certificates/restrict_external_ip/production/ --cert-request-organization-unit "{{ org_unit }}" --cert-request-organization "{{ org }}" --cert-request-locality "{{ locality }}" --cert-request-state "{{ state }}" --cert-request-country {{ country }} --cert-request-common-name {{ common_name }} --byo-ca-cert /etc/olcne/configs/certificates/production/ca.cert --byo-ca-key /etc/olcne/configs/certificates/production/ca.key --nodes externalip-validation-webhook-service.externalip-validation-system.svc,externalip-validation-webhook-service.externalip-validation-system.svc.cluster.local --one-cert
 -
   name: Start API-Server
   command:
