@@ -14,10 +14,10 @@
     - 8472/udp
 
 # Aplying masquerade firewall rules
--
-  name: Aplying masquerade firewall rules
-  command:
-    cmd: firewall-cmd --remove-masquerade --permanent
+#-
+#  name: Aplying masquerade firewall rules
+#  command:
+#    cmd: firewall-cmd --remove-masquerade --permanent
 
 # Aplying CNI interface to firewall rules
 -
