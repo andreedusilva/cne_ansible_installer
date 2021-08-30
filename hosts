@@ -1,6 +1,6 @@
 # OLCNE API Server
 [api_servers]
-api-server  ansible_host=master.br.olsclab.net ansible_user=root
+master  ansible_host=master.br.olsclab.net ansible_user=root
 
 # Kubernetes Master
 [masters]
