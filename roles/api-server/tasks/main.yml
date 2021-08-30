@@ -44,7 +44,7 @@
 -
   name: Install EPEL repository to deploy sshpass
   dnf:
-    name: ol8_x86_64_developer_EPEL
+    name: oracle-epel-release-el8
     state: present
 -
   name: Install sshpass command
