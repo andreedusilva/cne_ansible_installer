@@ -38,7 +38,7 @@
       - nfs-utils
       - nfs4-acl-tools
     state: present
- when: 
+  when: 
     - use_helm == True 
     - config_env == True
     - use_nfs = True
