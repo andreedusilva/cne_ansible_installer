@@ -1,3 +1,8 @@
 ---
 -
   name: Configuring repository on Helm
+  command:
+    cmd: helm repo add nfs-subdir-external-provisioner https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner/
+  became: True
+  become_method: su
+  become_user: kube-operator
