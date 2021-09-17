@@ -79,6 +79,12 @@
         path: /home/kube-operator/.kube/config
         owner: kube-operator
         group: wheel
-        mode: 0644
+        mode: 0600
       when: config_env == True
+
+-
+  name: Configure NFS to Kubernetes
+  hosts: masters
+  roles:
+    - nfs
 ...
