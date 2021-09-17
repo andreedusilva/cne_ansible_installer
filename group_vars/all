@@ -18,3 +18,8 @@ istio_module: istio
 # Helm is required to deploy Istio
 use_helm: False 
 helm_module: helm 
+
+# Configure NFS Storage? Helm is required
+use_nfs: False
+nfs_server: nfs.br.olsclab.net
+nfs_mountpoint: /srv/nfs
