@@ -30,4 +30,13 @@
   name: Reloading firewalld
   command:
     cmd: firewall-cmd --reload
+
+-
+  name: Installing NFS Client
+  dnf:
+    name:
+      - nfs-utils
+      - nfs4-acl-tools
+    state: present
+ when: use_nfs == True
 ...
