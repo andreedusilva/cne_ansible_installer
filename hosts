@@ -8,7 +8,8 @@ master      ansible_host=master.br.olsclab.net ansible_user=root
 
 # Kubernetes Workers
 [workers]
-worker    ansible_host=worker.br.olsclab.net ansible_user=root
+worker01    ansible_host=worker01.br.olsclab.net ansible_user=root
+worker02    ansible_host=worker02.br.olsclab.net ansible_user=root
 
 # Kubernetes hosts
 [kubernetes:children]
