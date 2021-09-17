@@ -6,3 +6,19 @@
   became: True
   become_method: su
   become_user: kube-operator
+  when:
+    - use_helm == True 
+    - config_env == True 
+    - use_nfs = True
+
+- 
+  name: Adding NFS Storage Class to Kubernetes
+  command: 
+    cmd: helm install nfs-subdir-external-provisioner nfs-subdir-external-provisioner/nfs-subdir-external-provisioner --set nfs.server={{ nfs_server }} --set nfs.path={{ nfs_path }}
+  became: True
+  become_method: su
+  become_user: kube-operator
+  when:
+    - use_helm == True 
+    - config_env == True 
+    - use_nfs = True
