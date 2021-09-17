@@ -9,17 +9,17 @@
        group: wheel
     
 -
-   name: Creating a kube directory
-     file:
-       path: /home/kube-operator/.kube
-       state: directory
-       mode: '0755'
+  name: Creating a kube directory
+    file:
+      path: /home/kube-operator/.kube
+      state: directory
+      mode: '0755'
  
 -
-   name: Configuring environment to kube-operator
-     lineinfile:
-       path: /home/kube-operator/.bashrc
-       line: export KUBECONFIG=$HOME/.kube/config
+  name: Configuring environment to kube-operator
+    lineinfile:
+      path: /home/kube-operator/.bashrc
+      line: export KUBECONFIG=$HOME/.kube/config
 
 -
   name: Copying kubernetes config file
