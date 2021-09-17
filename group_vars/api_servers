@@ -10,8 +10,8 @@ common_name: cloud.br.olsclab.net
 # All nodes to be installed (FQDN)
 master_ip_addr: 192.168.0.31
 master_node: master.br.olsclab.net:8090
-worker_nodes: worker.br.olsclab.net:8090
-all_nodes: master.br.olsclab.net,worker.br.olsclab.net
+worker_nodes: worker01.br.olsclab.net:8090,worker02.br.olsclab.net:8090
+all_nodes: master.br.olsclab.net,worker01.br.olsclab.net,worker02.br.olsclab.net
 
 # For use with SSH Public Key Managenment
 id_rsa_file: /root/.ssh/id_rsa
