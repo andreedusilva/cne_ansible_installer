@@ -1,5 +1,4 @@
 ---
- 
 - 
   name: Creating a kube-operator user
   user:
@@ -7,14 +6,14 @@
     comment: Kube Operator
     shell: /bin/bash
     group: wheel
-    
+ 
 -
   name: Creating a kube directory
   file:
     path: /home/kube-operator/.kube
     state: directory
     mode: '0755'
- 
+
 -
   name: Configuring environment to kube-operator
   lineinfile:
