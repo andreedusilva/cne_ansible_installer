@@ -1,12 +1,12 @@
- ---
+---
  
- - 
-   name: Creating a kube-operator user
-   user:
-     name: kube-operator
-     comment: Kube Operator
-     shell: /bin/bash
-     group: wheel
+- 
+  name: Creating a kube-operator user
+  user:
+    name: kube-operator
+    comment: Kube Operator
+    shell: /bin/bash
+    group: wheel
     
 -
   name: Creating a kube directory
