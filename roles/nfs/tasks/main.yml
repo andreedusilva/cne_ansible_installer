@@ -7,7 +7,7 @@
   when:
     - use_helm == True 
     - config_env == True 
-    - use_nfs = True
+    - use_nfs == True
 
 - 
   name: Adding NFS Storage Class to Kubernetes
@@ -17,4 +17,4 @@
   when:
     - use_helm == True 
     - config_env == True 
-    - use_nfs = True
+    - use_nfs == True
