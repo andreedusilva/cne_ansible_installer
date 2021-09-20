@@ -6,6 +6,7 @@
     comment: Kube Operator
     shell: /bin/bash
     group: wheel
+  when: add_new == False
  
 -
   name: Creating a kube directory
@@ -13,19 +14,21 @@
     path: /home/kube-operator/.kube
     state: directory
     mode: '0755'
+  when: add_new == False
 
 -
   name: Configuring environment to kube-operator
   lineinfile:
     path: /home/kube-operator/.bashrc
     line: export KUBECONFIG=$HOME/.kube/config
+  when: add_new == False
 
 -
   name: Copying kubernetes config file
   command:
     cmd: cp /etc/kubernetes/admin.conf /home/kube-operator/.kube/config
     creates: /home/kube-operator/.kube/config
-#  when: config_env == True
+  when: add_new == False
 
 -
   name: Setting permissions
@@ -34,4 +37,4 @@
     owner: kube-operator
     group: wheel
     mode: 0600
-#  when: config_env == True
+  when: config_env == True
