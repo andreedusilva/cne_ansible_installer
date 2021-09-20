@@ -6,7 +6,6 @@
   become_user: kube-operator
   when:
     - use_helm == True 
-    - config_env == True 
     - use_nfs == True
 
 - 
@@ -16,5 +15,4 @@
   become_user: kube-operator
   when:
     - use_helm == True 
-    - config_env == True 
     - use_nfs == True
