@@ -7,9 +7,12 @@ proxy_host: "http://proxy.inat.leao.pro.br:80"
 no_proxy: ".inat.leao.pro.br,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16"
 
 # Configure an Environment?
-config_env: False
+config_env: True
 env_name: olcne
 cluster: cluster
+
+# Adding new module? 
+add_new = False
 
 # Configure Istio module?
 use_istio: False
