@@ -27,18 +27,14 @@
   name: Adding helm module to the environment
   command:
     cmd: olcnectl --api-server 127.0.0.1:8091 module create --environment-name {{ env_name }} --module helm --name {{ helm_module }} --helm-kubernetes-module {{ cluster }}
-  when: 
-    - use_helm == True 
-    - config_env == True
+  when: use_helm == True 
 
 # Deploy helm
 -
   name: Deploying the helm module
   command:
     cmd: olcnectl --api-server 127.0.0.1:8091 module install --environment-name {{ env_name }} --name {{ helm_module }}
-  when: 
-    - use_helm == True 
-    - config_env == True 
+  when: use_helm == True 
 
 # Configure Istio to the environment
 -
@@ -48,7 +44,6 @@
   when: 
     - use_helm == True 
     - use_istio == True
-    - config_env == True
 
 # Deploy helm
 -
@@ -58,4 +53,3 @@
   when: 
     - use_helm == True 
     - use_istio == True
-    - config_env == True
