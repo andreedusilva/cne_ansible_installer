@@ -40,6 +40,5 @@
     state: present
   when: 
     - use_helm == True 
-    - config_env == True
     - use_nfs == True
 ...
