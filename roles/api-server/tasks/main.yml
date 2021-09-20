@@ -32,6 +32,7 @@
   name: Generating ssh key pair
   openssh_keypair:
     path: "{{ id_rsa_file }}"
+  when: add_new == False
 -
   name: Adjusting ssh config
   blockinfile:
@@ -41,6 +42,7 @@
           StrictHostKeyChecking no
     create: yes
     mode: 0600
+  when: add_new == False
 -
   name: Install EPEL repository to deploy sshpass
   dnf:
@@ -56,6 +58,7 @@
   command:
     cmd: sshpass -p "{{ root_password }}" ssh-copy-id -i "{{ id_rsa_file }}" root@"{{ item }}" -f
   loop: "{{ groups['all'] }}"
+  when: add_new == False
 
 # Configure API-Server
 -
@@ -78,26 +81,31 @@
   command:
     chdir: /etc/olcne
     cmd: ./gen-certs-helper.sh --cert-request-organization-unit "{{ org_unit }}" --cert-request-organization "{{ org }}" --cert-request-locality "{{ locality }}" --cert-request-state "{{ state }}" --cert-request-country {{ country }} --cert-request-common-name {{ common_name }} --nodes {{ all_nodes }}
+  when: add_new == False
 -
   name: Set correct user to send certificates
   replace:
     path: /etc/olcne/configs/certificates/olcne-tranfer-certs.sh
     regexp: '(\s+)USER=opc(\s+.*)?$'
     replace: '\1USER=root\2'
+  when: add_new == False
 -
   name: Copy certificates to Kubernetes nodes
   command:
     chdir: /etc/olcne
     cmd: bash -ex /etc/olcne/configs/certificates/olcne-tranfer-certs.sh
+  when: add_new == False
 -
   name: Generating additional certificates
   command:
     chdir: /etc/olcne
     cmd: ./gen-certs-helper.sh --cert-dir /etc/olcne/configs/certificates/restrict_external_ip/ --cert-request-organization-unit "{{ org_unit }}" --cert-request-organization "{{ org }}" --cert-request-locality "{{ locality }}" --cert-request-state "{{ state }}" --cert-request-country {{ country }} --cert-request-common-name {{ common_name }} --byo-ca-cert /etc/olcne/configs/certificates/production/ca.cert --byo-ca-key /etc/olcne/configs/certificates/production/ca.key --nodes externalip-validation-webhook-service.externalip-validation-system.svc,externalip-validation-webhook-service.externalip-validation-system.svc.cluster.local --one-cert
+  when: add_new == False
 -
   name: Start API-Server
   command:
     cmd: /etc/olcne/bootstrap-olcne.sh --secret-manager-type file --olcne-node-cert-path /etc/olcne/configs/certificates/production/node.cert --olcne-ca-path /etc/olcne/configs/certificates/production/ca.cert --olcne-node-key-path /etc/olcne/configs/certificates/production/node.key --olcne-component api-server
+  when: add_new == False
 -
   name: Configure OLCNE environment
   blockinfile:
@@ -106,4 +114,5 @@
       export OLCNE_SM_CA_PATH=/etc/olcne/configs/certificates/production/ca.cert
       export OLCNE_SM_CERT_PATH=/etc/olcne/configs/certificates/production/node.cert
       export OLCNE_SM_KEY_PATH=/etc/olcne/configs/certificates/production/node.key
+  when: add_new == False
 ...
