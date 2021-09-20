@@ -12,7 +12,7 @@ env_name: olcne
 cluster: cluster
 
 # Adding new module? 
-add_new = False
+add_new: False
 
 # Configure Istio module?
 use_istio: False
