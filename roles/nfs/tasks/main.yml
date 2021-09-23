@@ -4,15 +4,11 @@
   command: helm repo add nfs-subdir-external-provisioner https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner/
   become: yes
   become_user: kube-operator
-  when:
-    - use_helm == True 
-    - use_nfs == True
+  when: use_nfs == True
 
 - 
   name: Adding NFS Storage Class to Kubernetes
   command: helm install nfs-subdir-external-provisioner nfs-subdir-external-provisioner/nfs-subdir-external-provisioner --set nfs.server={{ nfs_server }} --set nfs.path={{ nfs_path }}
   become: yes
   become_user: kube-operator
-  when:
-    - use_helm == True 
-    - use_nfs == True
+  when: use_nfs == True
