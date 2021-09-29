@@ -26,3 +26,6 @@ helm_module: helm
 use_nfs: False
 nfs_server: nfs.br.olsclab.net
 nfs_path: /srv/nfs
+
+# Configure Cert-Manager?
+use_cert-manager: True
