@@ -52,8 +52,8 @@
     - operator
 
 -
-  name: Configure NFS to Kubernetes
+  name: Configure Optional Modules to Kubernetes
   hosts: masters
   roles:
-    - nfs
+    - optional
 ...
