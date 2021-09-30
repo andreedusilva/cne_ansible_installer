@@ -1,4 +1,7 @@
 ---
+# Define Python
+ansible_python_interpreter: /usr/bin/python3
+
 # Use Proxy?
 use_proxy: False
 
