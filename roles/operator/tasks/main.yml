@@ -47,13 +47,13 @@
     src: https://github.com/vmware-tanzu/velero/releases/download/v{{ velero_version }}/velero-v{{ velero_version }}-linux-amd64.tar.gz
     dest: /root
     remote_src: yes
-#  when: add_new == False
+  when: add_new == False
 - 
   name: Installing Velero
   command:
     cmd: cp /root/velero-v{{ velero_version }}-linux-amd64/velero /usr/bin/velero
     creates: /usr/bin/velero
-#  when: add_new == False
+  when: add_new == False
 -
   name: Creating OCI Auth File
   blockinfile:
@@ -65,12 +65,11 @@
     create: yes
   become: yes
   become_user: kube-operator
-#  when: add_new == False
+  when: add_new == False
 -
   name: Deploying Velero on Kubernetes
   command:
     cmd: velero install --provider aws --plugins velero/velero-plugin-for-aws:v1.1.0 --bucket velero --prefix {{ oci_tenancy }} --use-restic --use-volume-snapshots=false --secret-file /home/kube-operator/credentials-velero --backup-location-config region={{ oci_region }},s3ForcePathStyle="true",s3Url=https://{{ oci_bucket_namespace }}.compat.objectstorage.{{ oci_region }}.oraclecloud.com
   become: yes
   become_user: kube-operator
-#  when: add_new == False
-
+  when: add_new == False
