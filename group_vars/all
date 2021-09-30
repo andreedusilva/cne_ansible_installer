@@ -15,7 +15,7 @@ cluster: cluster
 add_new: True
 
 # Configure Istio module?
-use_istio: True
+use_istio: False
 istio_module: istio
 
 # Helm is required to deploy Istio
