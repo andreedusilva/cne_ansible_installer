@@ -28,7 +28,7 @@ nfs_server: nfs.br.olsclab.net
 nfs_path: /srv/nfs
 
 # Configure Cert-Manager?
-use_cert-manager: True
+use_certmanager: True
 
 # Velero Vars
 velero_version: 1.7.0
