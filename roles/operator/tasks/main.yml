@@ -40,6 +40,7 @@
   when: add_new == False
 
 # Installing Velero for Backups
+
 -
   name: Download Velero
   get_url: url=https://github.com/vmware-tanzu/velero/releases/download/v{{ velero_version }}/velero-v{{ velero_version }}-linux-amd64.tar.gz dest=/root/
@@ -50,4 +51,11 @@
     cmd: tar zxvf velero-v{{ velero_version }}-linux-amd64.tar.gz && cp /root/velero-v{{ velero_version }}-linux-amd64/velero /usr/bin/velero
     creates: /usr/bin/velero
 #  when: add_new == False
-  
+-
+  name: Deploying Velero on Kubernetes
+  command:
+    cmd: velero install --provider aws --plugins velero/velero-plugin-for-aws:v1.1.0 --bucket velero --prefix oleao --use-restic --use-volume-snapshots=false --secret-file /home/kube-operator/credentials-velero --backup-location-config region=us-ashburn-1,s3ForcePathStyle="true",s3Url=https://idbq3j7b4dwg.compat.objectstorage.us-ashburn-1.oraclecloud.com
+  become: yes
+  become-user: kube-operator
+#  when: add_new == False
+
