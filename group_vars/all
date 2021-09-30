@@ -29,3 +29,13 @@ nfs_path: /srv/nfs
 
 # Configure Cert-Manager?
 use_cert-manager: True
+
+# Velero Vars
+velero_version: 1.7.0
+
+# OCI Info
+oci_access_key: 9b769f8f841ab7cd43231ab0c51732d6d5bcc114
+oci_secret_access_key: ZtYHRTyd6cbrRKR6SOFn7oBAqlzJnb5jOXPmECG2bGc=
+oci_tenancy: oleao
+oci_region: us-ashburn-1
+oci_bucket_namespace: idbq3j7b4dwg
