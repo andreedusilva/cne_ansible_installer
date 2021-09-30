@@ -52,10 +52,22 @@
     creates: /usr/bin/velero
 #  when: add_new == False
 -
+  name: Creating OCI Auth File
+  blockinfile:
+    path: /home/kube-operator/credential-velero
+    block: |
+      [default]
+      aws_access_key_id={{ oci_access_key }}
+      aws_secret_access_key={{ oci_secret_access_key }}
+    create: yes
+  become: yes
+  become_user: kube-operator
+#  when: add_new == False
+-
   name: Deploying Velero on Kubernetes
   command:
-    cmd: velero install --provider aws --plugins velero/velero-plugin-for-aws:v1.1.0 --bucket velero --prefix oleao --use-restic --use-volume-snapshots=false --secret-file /home/kube-operator/credentials-velero --backup-location-config region=us-ashburn-1,s3ForcePathStyle="true",s3Url=https://idbq3j7b4dwg.compat.objectstorage.us-ashburn-1.oraclecloud.com
+    cmd: velero install --provider aws --plugins velero/velero-plugin-for-aws:v1.1.0 --bucket velero --prefix {{ oci_tenancy }} --use-restic --use-volume-snapshots=false --secret-file /home/kube-operator/credentials-velero --backup-location-config region={{ oci_region }},s3ForcePathStyle="true",s3Url=https://{{ oci_bucket_namespace }}.compat.objectstorage.{{ oci_region }}.oraclecloud.com
   become: yes
-  become-user: kube-operator
+  become_user: kube-operator
 #  when: add_new == False
 
