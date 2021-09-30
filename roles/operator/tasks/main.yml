@@ -43,12 +43,15 @@
 
 -
   name: Download Velero
-  get_url: url=https://github.com/vmware-tanzu/velero/releases/download/v{{ velero_version }}/velero-v{{ velero_version }}-linux-amd64.tar.gz dest=/root/
+  unarchive:
+    src: https://github.com/vmware-tanzu/velero/releases/download/v{{ velero_version }}/velero-v{{ velero_version }}-linux-amd64.tar.gz
+    dest: /root
+    remote_src: yes
 #  when: add_new == False
 - 
   name: Installing Velero
   command:
-    cmd: tar zxvf velero-v{{ velero_version }}-linux-amd64.tar.gz && cp /root/velero-v{{ velero_version }}-linux-amd64/velero /usr/bin/velero
+    cmd: cp /root/velero-v{{ velero_version }}-linux-amd64/velero /usr/bin/velero
     creates: /usr/bin/velero
 #  when: add_new == False
 -
