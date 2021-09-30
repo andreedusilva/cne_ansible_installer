@@ -57,7 +57,7 @@
 -
   name: Creating OCI Auth File
   blockinfile:
-    path: /home/kube-operator/credential-velero
+    path: /home/kube-operator/credentials-velero
     block: |
       [default]
       aws_access_key_id={{ oci_access_key }}
