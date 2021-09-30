@@ -43,7 +43,7 @@
     cmd: olcnectl --api-server 127.0.0.1:8091 module create --environment-name {{ env_name }} --module istio --name {{ istio_module }} --istio-helm-module {{ helm_module }}
   when: use_istio == True
 
-# Deploy helm
+# Deploy Istio
 -
   name: Deploying the istio module
   command:
