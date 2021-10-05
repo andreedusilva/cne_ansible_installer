@@ -1,15 +1,15 @@
-### Oracle Linux Cloud Native Environment Installer
+### Cloud Native Environment Ansible Installer
 
-- Expects Oracle Linux 8u3 or higher hosts
+- Expects Oracle Linux 8u3 or higher hosts with python3 installed
 
-These playbooks deploy an OLCNE version 1.3.x on top of 2 hosts/VMs (minimum).
-To use them, first edit the `hosts` inventory file to contain the hostnames of the machines on which you want OLCNE deployed.
+These playbooks deploy an OCNE version 1.3.x on top of 2 hosts/VMs (minimum).
+To use them, first edit the `hosts` inventory file to contain the hostnames of the machines on which you want OCNE deployed.
 
 You need to add at least a worker and master node. The API-Server may be the same as the master node.
 
 There is an example of `hosts` file:
 
-    # OLCNE API Server
+    # OCNE API Server
     api-server  ansible_host=api-server.inat.leao.pro.br
 
     # Kubernetes Master
@@ -59,6 +59,9 @@ And last, edit `group_vars/all` to setup proxy information of your installation 
     config_env: True
     env_name: myenv
     cluster: mycluster
+    
+    # Adding new module? This is the case of config_env: False and adding new module/service 
+    add_new: True
 
     # Configure Istio module?
     use_istio: True
@@ -67,6 +70,24 @@ And last, edit `group_vars/all` to setup proxy information of your installation 
     # Helm is required to deploy Istio
     use_helm: True 
     helm_module: myhelm
+    
+    # Configure NFS Storage? Helm is required
+    use_nfs: False
+    nfs_server: nfs.br.olsclab.net
+    nfs_path: /srv/nfs
+
+    # Configure Cert-Manager?
+    use_certmanager: False
+
+    # Velero Vars
+    velero_version: 1.7.0
+
+    # OCI Info - Information used by Velero - to more info: https://blogs.oracle.com/cloud-infrastructure/post/backing-up-your-oke-environment-with-velero
+    oci_access_key: ACCESS_KEY
+    oci_secret_access_key: SECRET_ACCESS_KEY
+    oci_tenancy: YOUR_TENANCY
+    oci_region: YOUR_REGION
+    oci_bucket_namespace: velero_BUCKET_NAMESPACE
 
 Note: edit `roles/common/tasks/main.yml` and uncomment the yum update lines to update your hosts in the same process of installs OLCNE (much slower):
 
@@ -77,9 +98,9 @@ Note: edit `roles/common/tasks/main.yml` and uncomment the yum update lines to u
         name: '*'
         state: latest
 
- ### Deploy Oracle Linux Cloud Native Environment
+ ### Deploy Cloud Native Environment
 
- The site.yml may be used to deploy a full Oracle Linux Cloud Native Environment.
+ The site.yml may be used to deploy a full Cloud Native Environment.
 
  Run the playbook using:
 
