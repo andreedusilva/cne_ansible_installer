@@ -15,4 +15,4 @@ all_nodes: master.br.olsclab.net,worker01.br.olsclab.net,worker02.br.olsclab.net
 
 # For use with SSH Public Key Managenment
 id_rsa_file: /root/.ssh/id_rsa
-root_password: "oracle"
+root_password: "PASSWORD"
