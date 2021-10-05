@@ -14,7 +14,7 @@ config_env: False
 env_name: olcne
 cluster: cluster
 
-# Adding new module? 
+# Adding new module? This is the case of config_env: False and adding new module/service 
 add_new: True
 
 # Configure Istio module?
@@ -36,9 +36,9 @@ use_certmanager: False
 # Velero Vars
 velero_version: 1.7.0
 
-# OCI Info
-oci_access_key: 9b769f8f841ab7cd43231ab0c51732d6d5bcc114
-oci_secret_access_key: ZtYHRTyd6cbrRKR6SOFn7oBAqlzJnb5jOXPmECG2bGc=
-oci_tenancy: oleao
-oci_region: us-ashburn-1
-oci_bucket_namespace: idbq3j7b4dwg
+# OCI Info - Information used by Velero - to more info: https://blogs.oracle.com/cloud-infrastructure/post/backing-up-your-oke-environment-with-velero
+oci_access_key: ACCESS_KEY
+oci_secret_access_key: SECRET_ACCESS_KEY
+oci_tenancy: YOUR_TENANCY
+oci_region: YOUR_REGION
+oci_bucket_namespace: velero_BUCKET_NAMESPACE
